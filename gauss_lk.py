@@ -51,21 +51,17 @@ def compute_wr(x,y,z):#this is the writhe of the entire chain takes the chain as
         for i in range (j+2,nvertices,1):
             v1=np.array([x[i-1],y[i-1],z[i-1]])
             v2=np.array([x[i],y[i],z[i]])
-                
             glk=gauss_lk(u1,u2,v1,v2)
             wr=wr+2*glk
-        #here is the contribution of the "closure edge"
+        
+    #here add the contribution of the "closure edge"
+    for j in range (2,nvertices-2,1):
+        u1=np.array([x[j-1],y[j-1],z[j-1]])
+        u2=np.array([x[j],y[j],z[j]])
         v1=np.array([x[nvertices-1],y[nvertices-1],z[nvertices-1]])
-        v2=np.array([x[0],y[0],z[0]])           
+        v2=np.array([x[0],y[0],z[0]])            
         glk=gauss_lk(u1,u2,v1,v2)
         wr=wr+2*glk
-    #here add the contribution of the "closure edge"
-    u1=np.array([x[nvertices-3],y[nvertices-3],z[nvertices-3]])
-    u2=np.array([x[nvertices-2],y[nvertices-2],z[nvertices-2]])
-    v1=np.array([x[nvertices-1],y[nvertices-1],z[nvertices-1]])
-    v2=np.array([x[0],y[0],z[0]])            
-    glk=gauss_lk(u1,u2,v1,v2)
-    wr=wr+2*glk
     
     return wr
 
