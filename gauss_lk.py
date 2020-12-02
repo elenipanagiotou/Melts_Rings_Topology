@@ -42,7 +42,7 @@ def gauss_lk(a1,a2,b1,b2): #this is the Gauss linking number of two vectors
     return alk
 
 
-def compute_wr(x,y,z):#this is the writhe of the entire chain takes the chain as input
+def compute_wr(x,y,z):#this is the writhe of the entire chain takes the chain as input- this is for a linear chain
     wr=0
     for j in range (1,nvertices-2,1):
         u1=np.array([x[j-1],y[j-1],z[j-1]])
@@ -54,6 +54,19 @@ def compute_wr(x,y,z):#this is the writhe of the entire chain takes the chain as
                 
             glk=gauss_lk(u1,u2,v1,v2)
             wr=wr+2*glk
+        #here is the contribution of the "closure edge"
+        v1=np.array([x[nvertices-1],y[nvertices-1],z[nvertices-1]])
+        v2=np.array([x[0],y[0],z[0]])           
+        glk=gauss_lk(u1,u2,v1,v2)
+        wr=wr+2*glk
+    #here add the contribution of the "closure edge"
+    u1=np.array([x[nvertices-3],y[nvertices-3],z[nvertices-3]])
+    u2=np.array([x[nvertices-2],y[nvertices-2],z[nvertices-2]])
+    v1=np.array([x[nvertices-1],y[nvertices-1],z[nvertices-1]])
+    v2=np.array([x[0],y[0],z[0]])            
+    glk=gauss_lk(u1,u2,v1,v2)
+    wr=wr+2*glk
+    
     return wr
 
 
